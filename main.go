@@ -13,7 +13,7 @@ func main() {
 	row[(cellsN-1)/2] = true
 	board[0] = row
 
-	ruleset := ruleset()
+	ruleset := rulesFromInt(30)
 
 	for r := 1; r < rowsN; r++ {
 		row = generateNextRow(row, ruleset)

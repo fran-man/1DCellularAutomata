@@ -13,7 +13,6 @@ func drawBoard(board [][]bool) {
 	dc.SetRGB(0, 0, 0)
 
 	for y, row := range board {
-		fmt.Println(row)
 		for x, cell := range row {
 			if cell {
 				fmt.Println("Drawing pixel", x, y)
@@ -23,5 +22,5 @@ func drawBoard(board [][]bool) {
 		}
 	}
 
-	dc.SavePNG("board.png")
+	dc.SavePNG("output/board.png")
 }
