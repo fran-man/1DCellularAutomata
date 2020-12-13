@@ -1,10 +1,8 @@
 package main
 
-import "fmt"
-
 func main() {
-	cellsN := 101
-	rowsN := 20
+	cellsN := 1001
+	rowsN := 500
 	row := make([]bool, cellsN)
 	board := make([][]bool, rowsN)
 
@@ -22,9 +20,7 @@ func main() {
 		board[r] = row
 	}
 
-	for _, row := range board {
-		fmt.Println(row)
-	}
+	drawBoard(board)
 }
 
 func generateNextRow(row []bool, ruleset []bool) []bool {
@@ -45,6 +41,7 @@ func ruleset() []bool {
 		ruleset[i] = false
 	}
 	ruleset[1] = true
+	ruleset[2] = true
 	return ruleset
 }
 
