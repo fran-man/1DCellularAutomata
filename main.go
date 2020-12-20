@@ -12,16 +12,17 @@ func main() {
 }
 
 func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
-	cellsN := 501
-	rowsN := 250
-	row := make([]bool, cellsN)
-	board := make([][]bool, rowsN)
+	cellsN := 251
+	rowsN := 125
+	row := make([]*Cell, cellsN)
+	board := make([][]*Cell, rowsN)
 
 	for i := 0; i < cellsN; i++ {
-		row[i] = false
+		row[i] = blankCell()
 	}
 
-	row[(cellsN-1)/2] = true
+	row[(cellsN-1)/2].state = true
+	row[(cellsN-1)/2].trueStreak = 1
 	board[0] = row
 
 	ruleset := rulesFromInt(rule)
@@ -38,26 +39,24 @@ func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
 	drawBoard(board, "rule-"+strconv.Itoa(rule)+"-final")
 }
 
-func generateNextRow(row []bool, ruleset []bool) []bool {
-	nextRow := make([]bool, len(row))
-	for i := 1; i < len(row)-1; i++ {
-		ruleToApply := stateToInt(row[i+1]) + stateToInt(row[i])*2 + stateToInt(row[i-1])*4
-		nextRow[i] = ruleset[ruleToApply]
+func generateNextRow(row []*Cell, ruleset []bool) []*Cell {
+	nextRow := make([]*Cell, len(row))
+	for i := 0; i < len(nextRow); i++ {
+		nextRow[i] = blankCell()
 	}
-	nextRow[0] = false
-	nextRow[len(row)-1] = false
+
+	for i := 1; i < len(row)-1; i++ {
+		ruleToApply := stateToInt(row[i+1].state) + stateToInt(row[i].state)*2 + stateToInt(row[i-1].state)*4
+		nextRow[i].state = ruleset[ruleToApply]
+		if nextRow[i].state {
+			nextRow[i].trueStreak = row[i].trueStreak + 1
+		}
+	}
+
+	nextRow[0].state = false
+	nextRow[len(row)-1].state = false
 
 	return nextRow
-}
-
-func ruleset() []bool {
-	ruleset := make([]bool, 8)
-	for i := 0; i < 8; i++ {
-		ruleset[i] = false
-	}
-	ruleset[1] = true
-	ruleset[2] = true
-	return ruleset
 }
 
 func stateToInt(state bool) int {
