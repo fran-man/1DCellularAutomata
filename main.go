@@ -8,7 +8,7 @@ func main() {
 	// 		drawAndPrintBoardForRule(i, false)
 	// 	}
 	// }
-	drawAndPrintBoardForRule(30, true)
+	drawAndPrintBoardForRule(110, true)
 }
 
 func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
@@ -35,7 +35,7 @@ func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
 		}
 	}
 
-	//drawBoard(board, "rule-"+strconv.Itoa(rule)+"-final")
+	drawBoard(board, "rule-"+strconv.Itoa(rule)+"-final")
 }
 
 func generateNextRow(row []bool, ruleset []bool) []bool {
