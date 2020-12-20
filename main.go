@@ -1,8 +1,19 @@
 package main
 
+import "strconv"
+
 func main() {
-	cellsN := 1001
-	rowsN := 500
+	// for i := 0; i < 128; i++ {
+	// 	if i%2 == 0 {
+	// 		drawAndPrintBoardForRule(i, false)
+	// 	}
+	// }
+	drawAndPrintBoardForRule(30, true)
+}
+
+func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
+	cellsN := 501
+	rowsN := 250
 	row := make([]bool, cellsN)
 	board := make([][]bool, rowsN)
 
@@ -13,14 +24,18 @@ func main() {
 	row[(cellsN-1)/2] = true
 	board[0] = row
 
-	ruleset := rulesFromInt(30)
+	ruleset := rulesFromInt(rule)
 
 	for r := 1; r < rowsN; r++ {
 		row = generateNextRow(row, ruleset)
 		board[r] = row
+
+		if drawAllFrames {
+			drawBoard(board, "rule-"+strconv.Itoa(rule)+"-frame"+strconv.Itoa(r))
+		}
 	}
 
-	drawBoard(board)
+	//drawBoard(board, "rule-"+strconv.Itoa(rule)+"-final")
 }
 
 func generateNextRow(row []bool, ruleset []bool) []bool {
