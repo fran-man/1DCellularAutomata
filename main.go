@@ -3,12 +3,12 @@ package main
 import "strconv"
 
 func main() {
-	// for i := 0; i < 128; i++ {
-	// 	if i%2 == 0 {
-	// 		drawAndPrintBoardForRule(i, false)
-	// 	}
-	// }
-	drawAndPrintBoardForRule(110, true)
+	for i := 0; i < 256; i++ {
+		if i%2 == 0 {
+			drawAndPrintBoardForRule(i, false)
+		}
+	}
+	//drawAndPrintBoardForRule(110, true)
 }
 
 func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
