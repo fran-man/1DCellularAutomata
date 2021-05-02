@@ -9,11 +9,11 @@ import (
 func drawBoard(board [][]*Cell, filename string) {
 	fmt.Println("Beginning to draw board to png image")
 
-	dc := gg.NewContext(2002, 1000)
+	dc := gg.NewContext(1920, 1080)
 
 	dc.SetRGB(1, 1, 1)
 
-	dc.DrawRectangle(0, 0, 2002, 1000)
+	dc.DrawRectangle(0, 0, 1920, 1080)
 	dc.Fill()
 
 	dc.SetRGB(0, 0, 0)
@@ -23,7 +23,7 @@ func drawBoard(board [][]*Cell, filename string) {
 		for x, cell := range row {
 			if cell.state {
 				dc.SetRGB(float64(cappedStreak(cell.trueStreak))/15, 0, 0)
-				dc.DrawRectangle(float64(x*8), float64(y*8), float64(8), float64(8))
+				dc.DrawRectangle(float64(x*8), float64(y*8+yOffset), float64(8), float64(8))
 				dc.Fill()
 			}
 		}

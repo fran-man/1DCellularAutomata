@@ -3,17 +3,13 @@ package main
 import "strconv"
 
 func main() {
-	for i := 0; i < 256; i++ {
-		if i%2 == 0 {
-			drawAndPrintBoardForRule(i, false)
-		}
+	for idx, rule := range rulesToPrint {
+		drawAndPrintBoardForRule(idx, rule, true)
 	}
 	//drawAndPrintBoardForRule(110, true)
 }
 
-func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
-	cellsN := 251
-	rowsN := 125
+func drawAndPrintBoardForRule(ruleIdx int, rule int, drawAllFrames bool) {
 	row := make([]*Cell, cellsN)
 	board := make([][]*Cell, rowsN)
 
@@ -32,11 +28,9 @@ func drawAndPrintBoardForRule(rule int, drawAllFrames bool) {
 		board[r] = row
 
 		if drawAllFrames {
-			drawBoard(board, "rule-"+strconv.Itoa(rule)+"-frame"+strconv.Itoa(r))
+			drawBoard(board, "InterestingRules-frame"+strconv.Itoa(calculateOverallFrame(ruleIdx, r)))
 		}
 	}
-
-	drawBoard(board, "rule-"+strconv.Itoa(rule)+"-final")
 }
 
 func generateNextRow(row []*Cell, ruleset []bool) []*Cell {
@@ -64,4 +58,9 @@ func stateToInt(state bool) int {
 		return 1
 	}
 	return 0
+}
+
+func calculateOverallFrame(ruleIdx int, relativeFrame int) int {
+	result := ruleIdx*(rowsN-1) + relativeFrame
+	return result
 }

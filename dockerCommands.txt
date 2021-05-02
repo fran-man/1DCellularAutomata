@@ -1,1 +1,1 @@
-docker run -v C:\Users\franm\dev\1dca\output\Keep\rule110:/images georgefrancis/ffmpeg:0.1 -r 18 -f image2 -s 1920x1080 -i /images/rule-110-frame%d.png -vcodec libx264 -crf 15 -pix_fmt yuv420p /images/rule110.mp4
+docker run -v <PATH>:/images georgefrancis/ffmpeg:0.1 -r 24 -f image2 -s 1920x1080 -i /images/InterestingRules-frame%d.png -vcodec libx264 -crf 15 -pix_fmt yuv420p /images/AllInterestingRules.mp4
